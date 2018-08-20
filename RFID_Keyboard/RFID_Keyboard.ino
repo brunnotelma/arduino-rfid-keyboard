@@ -64,6 +64,9 @@ void loop() {
 
   // Convert from bytes from UID array to String
   for (byte i = 0; i < mfrc522.uid.size; i++) {
+    if(mfrc522.uid.uidByte[i] < 0x10) {
+      RFID.concat("0");
+    }
     RFID.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
 
