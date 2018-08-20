@@ -22,6 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+#include <Keyboard.h>
+#include <SPI.h>
+#include <MFRC522.h>
+
 /*
  * Pin layout should be as follows:
  * Signal     Pin              Pin             Pin             Pin
@@ -35,18 +40,14 @@
  *
  */
 
-#include <Keyboard.h>
-#include <SPI.h>
-#include <MFRC522.h>
-
 #define SS_PIN    10
 #define RST_PIN   6
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 
 void setup() {
-  SPI.begin();          // Init SPI bus
-  mfrc522.PCD_Init();   // Init MFRC522 card
+  SPI.begin();
+  mfrc522.PCD_Init();
 }
 
 void loop() {
@@ -64,9 +65,12 @@ void loop() {
 
   // Convert from bytes from UID array to String
   for (byte i = 0; i < mfrc522.uid.size; i++) {
+    // Workaround: If the byte is less than 0x10, print
+    // a 0 before to print two digits.
     if(mfrc522.uid.uidByte[i] < 0x10) {
       RFID.concat("0");
     }
+
     RFID.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
 
