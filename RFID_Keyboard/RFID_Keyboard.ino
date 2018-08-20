@@ -70,10 +70,11 @@ void loop() {
     RFID.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
 
-  // Concat `enter` to submit or confirm on input
-  RFID.concat("\n");
-  RFID.toUpperCase(););
+  RFID.toUpperCase();
+
   Keyboard.print(RFID);
+  // Print `new line` to submit or confirm on input
+  Keyboard.print("\n");
 
   // Wait one-sec to start reading again
   delay(1000);
