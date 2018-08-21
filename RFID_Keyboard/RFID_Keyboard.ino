@@ -66,7 +66,7 @@ void loop() {
   // Convert from bytes from UID array to String
   for (byte i = 0; i < mfrc522.uid.size; i++) {
     // Workaround: If the byte is less than 0x10, print
-    // a 0 before to print two digits.
+    // a `0` before, to output two digits.
     if(mfrc522.uid.uidByte[i] < 0x10) {
       RFID.concat("0");
     }
