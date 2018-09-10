@@ -77,8 +77,9 @@ void loop() {
   RFID.toUpperCase();
 
   Keyboard.print(RFID);
-  // Print `new line` to submit or confirm on input
-  Keyboard.print("\n");
+  // Submit a return key, to submit or confirm on input
+  // REF.: https://www.arduino.cc/en/Reference/KeyboardModifiers
+  Keyboard.write(0xB0);
 
   // Wait one-sec to start reading again
   delay(1000);
